@@ -16,3 +16,19 @@ part_time=$(($full_day_hour/2))
 part_time_wage=$(($wage_per_hour*$part_time))
 echo 'Part Time: '$part_time ' Hours'
 echo 'Part Time Wage: '$part_time_wage
+
+echo 1. Full Day Working Hours
+echo 2. Part Time Working Hours
+read -p "Enter your choice (1 0r 2): " choice
+case $choice in
+         '1')
+			work_hours=$full_day_hour
+			;;
+			'2')
+			work_hours=$part_time
+			;;
+			*)
+			work_hours=0
+			;;
+esac
+echo Work hours' : ' $work_hours
