@@ -36,3 +36,19 @@ echo Work hours' : ' $work_hours
 workingDaysPerMonth=20
 one_month_wage=$(($daily_employee_wage*$workingDaysPerMonth))
 echo Per Month wage is ' : '$one_month_wage
+
+total_work_hours=0
+totalNumberOfDays=0
+while [[ $total_work_hours -le 100 || $totalNumberOfDays -eq 20 ]]
+do
+			((total_work_hours++))
+			monthly_part_time_wage=$(($total_work_hours*$part_time_wage))
+			monthly_full_time_wage=$(($total_work_hours*$daily_employee_wage))
+
+			if [[ $monthly_full_time_wage%$daily_employee_wage -eq 0 ]]
+			then
+			((totalNumberOfDays++))
+			fi
+			echo "monthly_part_time_wage is "$monthly_part_time_wage
+			echo "monthly_full_time_wage is "$monthly_full_time_wage
+done
