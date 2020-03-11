@@ -32,3 +32,7 @@ case $choice in
 			;;
 esac
 echo Work hours' : ' $work_hours
+
+workingDaysPerMonth=20
+one_month_wage=$(($daily_employee_wage*$workingDaysPerMonth))
+echo Per Month wage is ' : '$one_month_wage
