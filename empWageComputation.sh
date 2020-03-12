@@ -40,26 +40,34 @@ workHours
 echo Work hours' : ' $work_hours
 printf "\n"
 
+workingDaysPerMonth=20
+one_month_wage=$(($daily_employee_wage*$workingDaysPerMonth))
+echo Per Month wage is ' : '$one_month_wage
+printf "\n"
 
-
-
-
-
-#workingDaysPerMonth=20
-#one_month_wage=$(($daily_employee_wage*$workingDaysPerMonth))
-#echo Per Month wage is ' : '$one_month_wage
-#printf "\n"
-
-#total_work_hours=0
-#totalNumberOfDays=0
+total_work_hours=0
+totalNumberOfDays=0
 #counter1=0
 #counter2=0
-#while [[ $total_work_hours -le 100 || $totalNumberOfDays -eq 20 ]]
-#do
-#			((total_work_hours++))
-#			monthly_part_time_wage=$(($total_work_hours*$part_time_wage))
-#			monthly_full_time_wage=$(($total_work_hours*$daily_employee_wage))
-#
+i=1
+while [[ $totalNumberOfDays -lt 20 ]]
+do
+			((total_work_hours++))
+			((totalNumberOfDays++))
+			monthly_part_time_wage=$(($total_work_hours*$part_time_wage))
+			echo "day $i Total part time wage is "$monthly_part_time_wage
+
+			monthly_full_time_wage=$(($total_work_hours*$daily_employee_wage))
+			echo "day $i Total full time wage is "$monthly_full_time_wage
+                        ((i++))
+done
+printf "\n"
+
+
+
+
+
+
 #			if [[ $monthly_full_time_wage%$daily_employee_wage -eq 0 ]]
 #			then
 #			((totalNumberOfDays++))
@@ -73,6 +81,7 @@ printf "\n"
 #			echo "monthly_full_time_wage is "$monthly_full_time_wage
 #done
 #printf "\n"
+
 #echo "Daily part time wage (goes on addition) : " ${TotalPartTimeWage[@]}
 #printf "\n"
 #echo "Daily full time wage (goes on addition) : " ${TotalFullTimeWage[@]}
