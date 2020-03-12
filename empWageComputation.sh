@@ -26,9 +26,11 @@ read -p "Enter your choice (1 0r 2): " choice
 workHours () {
 case $choice in
          '1')
+			a="Full-Time "
 			work_hours=$full_day_hour
 			;;
 			'2')
+			a="Part-Time"
 			work_hours=$part_time
 			;;
 			*)
@@ -37,20 +39,20 @@ case $choice in
 esac
 }
 workHours
-echo Work hours' : ' $work_hours
+echo $a Work hours' : ' $work_hours
 printf "\n"
 
 workingDaysPerMonth=20
 one_month_wage=$(($daily_employee_wage*$workingDaysPerMonth))
-echo Per Month wage is ' : '$one_month_wage
+echo Per Month full 'time' wage is ' : '$one_month_wage
 printf "\n"
 
 total_work_hours=0
 totalNumberOfDays=0
-#counter1=0
-#counter2=0
+counter1=0
+counter2=0
 i=1
-while [[ $totalNumberOfDays -lt 20 ]]
+while [[ $totalNumberOfDays -lt 40 ]]
 do
 			((total_work_hours++))
 			((totalNumberOfDays++))
@@ -60,50 +62,49 @@ do
 			monthly_full_time_wage=$(($total_work_hours*$daily_employee_wage))
 			echo "day $i Total full time wage is "$monthly_full_time_wage
                         ((i++))
+
+
+			if [[ $monthly_full_time_wage%$daily_employee_wage -eq 0 ]]
+			then
+			((totalNumberOfDays++))
+			fi
+			TotalPartTimeWage[((counter1))]="$monthly_part_time_wage"
+			((counter1++))
+			TotalFullTimeWage[((counter2))]="$monthly_full_time_wage"
+			((counter2++))
+
+#			echo "monthly_part_time_wage is "$monthly_part_time_wage
+#			echo "monthly_full_time_wage is "$monthly_full_time_wage
 done
 printf "\n"
 
+echo "Daily part time wage (goes on addition) : " ${TotalPartTimeWage[@]}
+printf "\n"
+echo "Daily full time wage (goes on addition) : " ${TotalFullTimeWage[@]}
+printf "\n"
 
+randomFunction2 () {
+rdm=$(($RANDOM%2))
+if [[ $rdm -eq 0 ]]
+then
+x=$daily_employee_wage
+else
+x=$part_time_wage
+fi
+}
+count=0
+day=( [count]=0 )
+while [[ $count -le 19 ]]
+do
+randomFunction2
+((count++))
+day[count]=$x
+done
+echo "Day Number : Daily Employee Wage (Part time or Full time)"
+echo ${!day[@]} ' : ' ${day[@]}
 
-
-
-
-#			if [[ $monthly_full_time_wage%$daily_employee_wage -eq 0 ]]
-#			then
-#			((totalNumberOfDays++))
-#			fi
-#			TotalPartTimeWage[((counter1))]="$monthly_part_time_wage"
-#			((counter1++))
-#			TotalFullTimeWage[((counter2))]="$monthly_full_time_wage"
-#			((counter2++))
-#
-#			echo "monthly_part_time_wage is "$monthly_part_time_wage
-#			echo "monthly_full_time_wage is "$monthly_full_time_wage
-#done
-#printf "\n"
-
-#echo "Daily part time wage (goes on addition) : " ${TotalPartTimeWage[@]}
-#printf "\n"
-#echo "Daily full time wage (goes on addition) : " ${TotalFullTimeWage[@]}
-#printf "\n"
-
-#randomFunction2 () {
-#rdm=$(($RANDOM%2))
-#if [[ $rdm -eq 0 ]]
-#then
-#x=$daily_employee_wage
-#else
-#x=$part_time_wage
-#fi
-#}
-#count=0
-#day=( [count]=0 )
-#while [[ $count -le 19 ]]
-#do
-#randomFunction2
-#((count++))
-#day[count]=$x
-#done
-#echo "Day Number : Daily Employee Wage (Part time or Full time)"
-#echo ${!day[@]} ' : ' ${day[@]}
-#printf "\n"
+for((k=0; k<=20; k++))
+do
+echo day $k' = '${day[k]}
+done
+printf "\n"
